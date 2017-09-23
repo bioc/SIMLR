@@ -19,15 +19,19 @@ BiocStyle::latex()
 
 \title{Using the \Biocpkg{SIMLR} package}
 
-\author{
-	Bo Wang\footnote{Department of Computer Science, Stanford University, Stanford, CA , USA.} \and
-	Daniele Ramazzotti\footnote{Department of Pathology, Stanford University, Stanford, CA , USA.} \and
-	Luca De Sano\footnote{Dipartimento di Informatica Sistemistica e Comunicazione, Università degli Studi Milano Bicocca 
-	Milano, Italy.} \and
-	Junjie Zhu\footnote{Department of Electrical Engineering, Stanford University, Stanford, CA , USA.} \and
-	Emma Pierson\footnote{Department of Computer Science, Stanford University, Stanford, CA , USA.} \and
-	Serafim Batzoglou\footnote{Department of Computer Science, Stanford University, Stanford, CA , USA.}
-}
+\author[1]{Bo Wang}
+\author[2]{Daniele Ramazzotti}
+\author[3]{Luca De Sano}
+\author[4]{Junjie Zhu}
+\author[1]{Emma Pierson}
+\author[1]{Serafim Batzoglou}
+
+\affil[1]{Department of Computer Science, Stanford University, Stanford, CA , USA}
+\affil[2]{Department of Pathology, Stanford University, Stanford, CA , USA}
+\affil[3]{Dipartimento di Informatica Sistemistica e Comunicazione, Università degli Studi Milano Bicocca, 
+    Milano, Italy}
+\affil[4]{Department of Electrical Engineering, Stanford University, Stanford, CA, USA}
+
 
 \date{\today}
 \maketitle
@@ -123,7 +127,7 @@ We now compute the normalized mutual information between the inferred clusters b
 
 <<nmi_performance>>=
 nmi_1 = compare(BuettnerFlorian$true_labs[,1], example$y$cluster, method="nmi")
-print(nmi_1)
+nmi_1
 @
 
 As a further understanding of the results, we now visualize the cell populations in a plot. 
@@ -144,19 +148,6 @@ plot(example$ydata,
 \caption{Visualization of the 3 cell populations retrieved by SIMLR on the dataset by Florian, et al.}
 \end{figure*}
 
-SIMRL supports SCESet objects. We now create an example object and then run SIMLR on it.
-
-<<sceset, message=FALSE, warning=FALSE>>=
-library(scran)
-ncells = 100
-ngenes = 50
-mu <- 2^runif(ngenes, 3, 10)
-gene.counts <- matrix(rnbinom(ngenes*ncells, mu=mu, size=2), nrow=ngenes)
-rownames(gene.counts) = paste0("X", seq_len(ngenes))
-sce = newSCESet(countData=data.frame(gene.counts))
-output = SIMLR(X = sce, c = 8, cores.ratio = 0)
-@
-
 We also run SIMLR feature ranking on the same inputs to get a rank of the key genes with the related pvalues. 
 
 <<SIMLR_Feature_Ranking_run, results='hide'>>=
@@ -173,14 +164,14 @@ We finally show an example for SIMLR large scale on an input dataset being a red
 
 <<SIMLR_Large_Scale_run, warning=FALSE>>=
 set.seed(11111)
-example_large_scale = SIMLR_Large_Scale(X = ZeiselAmit$in_X, c = ZeiselAmit$n_clust)
+example_large_scale = SIMLR_Large_Scale(X = ZeiselAmit$in_X, c = ZeiselAmit$n_clust, kk = 10)
 @
 
 We compute the normalized mutual information between the inferred clusters by SIMLR large scale and the true ones. 
 
 <<nmi_performance_large_scale>>=
 nmi_2 = compare(ZeiselAmit$true_labs[,1], example_large_scale$y$cluster, method="nmi")
-print(nmi_2)
+nmi_2
 @
 
 As a further understanding of the results, also in this case we visualize the cell populations in a plot. 
@@ -201,9 +192,34 @@ plot(example_large_scale$ydata,
 \caption{Visualization of the 9 cell populations retrieved by SIMLR large scale on the dataset by Zeisel, Amit, et al.}
 \end{figure*}
 
+Now, as a final example, we also provide the results of two heuristics (see the original SIMLR paper) to estimate the number of clusters from data. 
+
+<<SIMLR_Number_Clusters_run, warning=FALSE>>=
+set.seed(53900)
+NUMC = 2:5
+res_example = SIMLR_Estimate_Number_of_Clusters(BuettnerFlorian$in_X,
+    NUMC = NUMC,
+    cores.ratio = 1)
+@
+
+Best number of clusters, K1 heuristic:
+<<SIMLR_NC_output_k1>>=
+NUMC[which.min(res_example$K1)]
+@
+
+K2 heuristic:
+<<SIMLR_NC_output_k2>>=
+NUMC[which.min(res_example$K2)]
+@
+
+Results of the two heuristics:
+<<SIMLR_NC_output, warning=FALSE>>=
+res_example
+@
+
 \section{\Rcode{sessionInfo()}}
 
-<<sessioninfo, results='asis'>>=
+<<sessioninfo, results='asis', echo=FALSE>>=
 toLatex(sessionInfo())
 @
 
