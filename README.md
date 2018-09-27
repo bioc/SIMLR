@@ -49,10 +49,9 @@ The citation of Wang, Bo, et al. "SIMLR: A Tool for Large‐Scale Genomic Analys
 
 As mentioned, both *SIMLR* and *CIMLR* are also hosted on Bioconductor at https://bioconductor.org/packages/release/bioc/html/SIMLR.html and can be installed as follow. To install the package directly from Bioconductor, run the following commands directly from R: 
 
-if (!requireNamespace("BiocManager", quietly=TRUE))
-    install.packages("BiocManager")
+source("https://bioconductor.org/biocLite.R")
 
-BiocManager::install("SIMLR")
+biocLite("SIMLR")
 
 Moreover, it is also possible to install the Github version of the tool from R by using the R library devtools. 
 

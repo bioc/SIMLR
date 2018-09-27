@@ -1,20 +1,17 @@
 language: r
-r: bioc-release
 r: bioc-devel
 
 cache: packages
 
-before_install:    
+before_install:
   - tlmgr install tcolorbox
+  - tlmgr install bera
+  - tlmgr install nowidow
+  - tlmgr install parnotes
+  - tlmgr install marginfix
 
 # safelist
 branches:
   only:
   - master
   - development
-
-# r_packages:
-#   - covr
-
-# after_success:
-#   - Rscript -e 'library(covr); codecov()'
