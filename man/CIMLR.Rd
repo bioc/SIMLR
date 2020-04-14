@@ -33,3 +33,10 @@ list of 8 elements describing the clusters obtained by CIMLR, of which y are the
 \description{
 perform the CIMLR clustering algorithm
 }
+\examples{
+clusters = 3
+\dontrun{
+CIMLR(X = GliomasReduced$in_X, c = clusters, cores.ratio = 0)
+}
+
+}

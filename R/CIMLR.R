@@ -2,9 +2,12 @@
 #' 
 #' @title please refer to https://github.com/danro9685/CIMLR 
 #'
-## @examples
-## CIMLR(X = GliomasReduced$in_X, c = 3, cores.ratio = 0)
-#' 
+#' @examples
+#' clusters = 3
+#' \dontrun{
+#' CIMLR(X = GliomasReduced$in_X, c = clusters, cores.ratio = 0)
+#' }
+#'
 #' @param X a list of multi-omic data each of which is an (m x n) data matrix of measurements of cancer patients
 #' @param c number of clusters to be estimated over X
 #' @param no.dim number of dimensions

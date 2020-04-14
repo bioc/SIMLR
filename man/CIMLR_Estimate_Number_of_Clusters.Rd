@@ -4,8 +4,7 @@
 \alias{CIMLR_Estimate_Number_of_Clusters}
 \title{please refer to https://github.com/danro9685/CIMLR}
 \usage{
-CIMLR_Estimate_Number_of_Clusters(all_data, NUMC = 2:5,
-  cores.ratio = 1)
+CIMLR_Estimate_Number_of_Clusters(all_data, NUMC = 2:5, cores.ratio = 1)
 }
 \arguments{
 \item{all_data}{is a list of multi-omic data each of which is an (m x n) data matrix of measurements of cancer patients}
@@ -20,4 +19,13 @@ values the better) as discussed in the original paper of SIMLR
 }
 \description{
 estimate the number of clusters by means of two huristics as discussed in the CIMLR paper
+}
+\examples{
+clusters = 2:5
+\dontrun{ 
+CIMLR_Estimate_Number_of_Clusters(GliomasReduced$in_X,
+   NUMC = clusters,
+   cores.ratio = 0)
+}
+
 }

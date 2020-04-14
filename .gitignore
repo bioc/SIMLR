@@ -37,3 +37,4 @@ cfg.R
 /src/projsplx_R.o
 /inst/doc/SIMLR.R
 /inst/doc/SIMLR.Rnw
+*.dll
