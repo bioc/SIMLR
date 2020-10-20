@@ -9,12 +9,17 @@ BiocStyle::latex()
 
 %\VignetteIndexEntry{Single-cell Interpretation via Multi-kernel LeaRning (\Biocpkg{SIMLR})}
 
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage{expl3}
+
 \usepackage[utf8]{inputenc}
+
 \usepackage{graphicx}
-\usepackage{placeins}
-\usepackage{url}
 \usepackage{tcolorbox}
 \usepackage{authblk}
+
+\usepackage{placeins}
+\usepackage{url}
 
 \begin{document}
 
