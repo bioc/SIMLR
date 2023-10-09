@@ -1,6 +1,6 @@
 Package: SIMLR
-Version: 1.27.1
-Date: 2023-04-06
+Version: 1.27.2
+Date: 2023-09-25
 Title: 
     Single-cell Interpretation via Multi-kernel LeaRning (SIMLR)
 Authors@R: c(person("Daniele", "Ramazzotti", role=c("aut"),email="daniele.ramazzotti@unimib.it",
